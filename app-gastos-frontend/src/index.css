@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Cuerpo principal (fondo base) */
+  body {
+    /* Los layouts ahora controlan el fondo, pero dejamos un base */
+    @apply bg-white dark:bg-dark text-gray-900 dark:text-gray-100;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Estilos globales para todos los inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    @apply block w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border-transparent rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    /* CAMBIO: Eliminamos 'sm:text-sm' para que el texto sea de tamaño 'base' (16px) */
+  }
+
+  /* Definición de clases de botones personalizadas */
+  .btn {
+    @apply w-full flex justify-center items-center gap-2 px-4 py-3 font-medium rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200;
+  }
+  .btn-primary {
+    /* DEGRADADO LLAMATIVO */
+    @apply btn bg-gradient-to-r from-primary to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 focus:ring-primary;
+  }
+  .btn-secondary {
+    /* DEGRADADO LLAMATIVO */
+    @apply btn bg-gradient-to-r from-secondary to-green-700 text-white hover:from-green-700 hover:to-green-800 focus:ring-secondary;
+  }
+  .btn-danger {
+    /* DEGRADADO LLAMATIVO */
+    @apply btn bg-gradient-to-r from-danger to-red-700 text-white hover:from-red-700 hover:to-red-800 focus:ring-danger;
+  }
+  .btn-link {
+    @apply font-medium text-primary hover:text-blue-700;
+  }
+}
+
+/* --- INICIO DE LA MODIFICACIÓN --- */
+/* Eliminamos toda la capa @layer components y la regla .form-label. 
+   Ya no la necesitamos y es la que causa el bug. */
+/* --- FIN DE LA MODIFICACIÓN --- */
