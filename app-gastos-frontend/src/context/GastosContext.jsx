@@ -18,7 +18,8 @@ export const GastosProvider = ({ children }) => {
   // --- Funciones del CRUD ---
 
   // OBTENER todos los gastos
-  const getGastos = useCallback(async () => { // 2. Envolver con useCallback
+  const getGastos = useCallback(async () => { 
+    // 2. Envolver con useCallback
     try {
       const res = await getGastosRequest();
       setGastos(res.data);

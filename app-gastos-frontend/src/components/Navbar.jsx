@@ -32,7 +32,7 @@ export default function Navbar() {
                 Hola, {user?.nombre}
               </li>
               
-              {/* --- INICIO DE LA MODIFICACIÓN --- */}
+              
               {/* Botón Nuevo Ingreso */}
               <li>
                 <Link
@@ -55,7 +55,7 @@ export default function Navbar() {
                   <span className="hidden md:block">Nuevo Gasto</span>
                 </Link>
               </li>
-              {/* --- FIN DE LA MODIFICACIÓN --- */}
+              
 
               <li>
                 <button
@@ -68,7 +68,7 @@ export default function Navbar() {
               </li>
             </>
           ) : (
-            // ... (links de login/register no cambian)
+            // ... (links de login/register )
             <>
               <li>
                 <Link to="/login" className="text-gray-700 hover:text-primary font-medium">

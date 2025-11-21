@@ -13,7 +13,7 @@ export const getGastos = async (req, res) => {
         usuario_id: userId,
       },
       orderBy: {
-        fecha: 'desc', // Mostrar los más recientes primero
+        fecha: 'desc', 
       },
     });
     res.status(200).json(gastos);
@@ -36,11 +36,11 @@ export const createGasto = async (req, res) => {
   try {
     const newGasto = await prisma.gasto.create({
       data: {
-        monto: parseFloat(monto), // Asegurarse de que sea un número
+        monto: parseFloat(monto), 
         categoria,
-        fecha: new Date(fecha), // Asegurarse de que sea un objeto Date
+        fecha: new Date(fecha), 
         descripcion,
-        usuario_id: userId, // Asociar con el usuario logueado
+        usuario_id: userId, 
       },
     });
     res.status(201).json(newGasto);
@@ -52,14 +52,14 @@ export const createGasto = async (req, res) => {
 
 // --- Obtener un gasto específico por ID ---
 export const getGastoById = async (req, res) => {
-  const gastoId = req.params.id; // <-- CAMBIO: Eliminamos parseInt()
+  const gastoId = req.params.id; 
   const userId = req.userId;
 
   try {
     const gasto = await prisma.gasto.findFirst({
       where: {
-        id: gastoId, // <-- Ahora le pasamos el String
-        usuario_id: userId, // Asegurarse que el gasto pertenece al usuario
+        id: gastoId,
+        usuario_id: userId, 
       },
     });
 
@@ -75,7 +75,7 @@ export const getGastoById = async (req, res) => {
 
 // --- Actualizar un gasto ---
 export const updateGasto = async (req, res) => {
-  const gastoId = req.params.id; // <-- CAMBIO: Eliminamos parseInt()
+  const gastoId = req.params.id; 
   const userId = req.userId;
   const { monto, categoria, fecha, descripcion } = req.body;
 
@@ -112,14 +112,14 @@ export const updateGasto = async (req, res) => {
 
 // --- Eliminar un gasto ---
 export const deleteGasto = async (req, res) => {
-  const gastoId = req.params.id; // <-- CAMBIO: Eliminamos parseInt()
+  const gastoId = req.params.id; 
   const userId = req.userId;
 
   try {
     // Usamos deleteMany para asegurar que solo borramos si el ID y usuario_id coinciden
     const result = await prisma.gasto.deleteMany({
       where: {
-        id: gastoId, // <-- Ahora le pasamos el String
+        id: gastoId, 
         usuario_id: userId,
       },
     });
@@ -140,7 +140,6 @@ export const deleteGasto = async (req, res) => {
 // --- Obtener Estadísticas (Placeholder) ---
 export const getGastosStats = async (req, res) => {
   const userId = req.userId;
-  // (Aquí implementarías la lógica de agregación de Prisma)
-  // Por ahora, devolvemos un mensaje
+  
   res.json({ message: `Estadísticas para el usuario ${userId} estarán aquí.` });
 };

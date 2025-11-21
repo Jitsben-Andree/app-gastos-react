@@ -152,7 +152,7 @@ export default function DashboardPage() {
 
   }, [gastos, ingresos, selectedMonth, selectedYear, categoryFilter]);
 
-  // --- Funciones para manejar los filtros (se quedan igual) ---
+  //Funciones para manejar los filtros
   const handleCategoryToggle = (categoria) => {
     setCategoryFilter(prev => {
       if (prev.includes(categoria)) {
@@ -184,10 +184,10 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* --- Filtros (Se quedan igual) --- */}
+          {/* --- Filtros  --- */}
           <div className="mb-8 p-6 bg-card dark:bg-card-dark rounded-xl shadow-md space-y-4">
             
-            {/* --- Filtro de Fecha (Tu idea de Mes/Año) --- */}
+            {/* --- Filtro de Fecha  --- */}
             <div className="flex flex-col sm:flex-row sm:items-end gap-4">
               {/* Desplegable de Mes */}
               <div className="flex-1">
@@ -269,7 +269,7 @@ export default function DashboardPage() {
             />
           </div>
 
-          {/* --- Gráfico de Categorías (se queda igual, usa datos filtrados) --- */}
+          {/* --- Gráfico de Categorías  --- */}
           <div className="mb-6">
             <GastosPorCategoriaCard data={summaryData.byCategory} />
           </div>
@@ -302,7 +302,7 @@ export default function DashboardPage() {
               </div>
             </div>
           ) : (summaryData.allTransactions.length === 0) ? (
-            // Mensaje si hay datos, pero NINGUNO coincide con el filtro
+            // Mensaje si hay datos
             <div className="text-center text-gray-500 py-16 bg-card rounded-xl shadow-md">
               <h2 className="text-2xl font-semibold mb-4">Sin resultados</h2>
               <p className="mb-6">No se encontraron transacciones que coincidan con los filtros seleccionados.</p>

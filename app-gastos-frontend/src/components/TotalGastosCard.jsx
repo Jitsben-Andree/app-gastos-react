@@ -1,10 +1,10 @@
 import { Wallet, TrendingUp } from 'lucide-react';
 
-// Función para formatear a moneda (ej: $242.00)
+// Función para formatear a moneda 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD', // Puedes cambiar esto si es necesario
+    currency: 'USD', 
   }).format(amount);
 };
 

@@ -41,14 +41,14 @@ export default function IngresoCard({ ingreso }) {
     ), { duration: 6000 });
   };
 
-  // --- INICIO DE LA CORRECCIÓN 3 (Mostrar en Tarjeta) ---
+  // Mostrar en Tarjeta
   const fechaFormateada = new Date(ingreso.fecha).toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC', // Le decimos que la fecha de la BD ya está en UTC
   });
-  // --- FIN DE LA CORRECCIÓN 3 ---
+  
 
   return (
     <div className="bg-card dark:bg-card-dark shadow-md rounded-xl p-6 transition-all hover:shadow-lg">

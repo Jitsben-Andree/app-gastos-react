@@ -22,23 +22,23 @@ export default function GastosPorCategoriaCard({ data }) {
   // Solo mostramos las 5 categorías principales
   const topCategories = data.slice(0, 5);
 
-  // --- INICIO DE LA CORRECCIÓN ---
-  // 1. Objeto de estilo para el Tooltip
+  
+  //Objeto de estilo para el Tooltip
   const tooltipContentStyle = {
-    backgroundColor: '#ffffff', // bg-white
-    borderRadius: '0.5rem', // rounded-lg
+    backgroundColor: '#ffffff', 
+    borderRadius: '0.5rem',
     border: 'none',
-    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', // shadow-md
+    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', 
   };
   const tooltipLabelStyle = {
-    color: '#1f2937', // text-gray-800 (¡Esto arregla tu bug!)
-    marginBottom: '0.25rem', // mb-1
-    fontWeight: '600', // font-semibold
+    color: '#1f2937', 
+    marginBottom: '0.25rem',
+    fontWeight: '600', 
   };
   const tooltipItemStyle = {
     color: '#374151', // text-gray-700
   };
-  // --- FIN DE LA CORRECCIÓN ---
+  
 
   return (
     <div className="bg-card dark:bg-card-dark shadow-md rounded-xl p-6">
@@ -103,9 +103,9 @@ export default function GastosPorCategoriaCard({ data }) {
                   </Pie>
                   <Tooltip 
                     formatter={(value) => formatCurrency(value)} 
-                    contentStyle={tooltipContentStyle} // 2. Aplicar estilos
-                    labelStyle={tooltipLabelStyle}   // 2. Aplicar estilos
-                    itemStyle={tooltipItemStyle}    // 2. Aplicar estilos
+                    contentStyle={tooltipContentStyle} 
+                    labelStyle={tooltipLabelStyle}   
+                    itemStyle={tooltipItemStyle}    
                   />
                 </PieChart>
               ) : (
@@ -119,9 +119,9 @@ export default function GastosPorCategoriaCard({ data }) {
                   <YAxis fontSize={10} axisLine={false} tickLine={false} />
                   <Tooltip 
                     formatter={(value) => formatCurrency(value)} 
-                    contentStyle={tooltipContentStyle} // 2. Aplicar estilos
-                    labelStyle={tooltipLabelStyle}   // 2. Aplicar estilos
-                    itemStyle={tooltipItemStyle}    // 2. Aplicar estilos
+                    contentStyle={tooltipContentStyle} 
+                    labelStyle={tooltipLabelStyle}   
+                    itemStyle={tooltipItemStyle}    
                   />
                   <Bar dataKey="total">
                     {topCategories.map((entry, index) => (

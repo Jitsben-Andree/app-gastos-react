@@ -2,10 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Loader } from 'lucide-react';
 
-/**
- * Componente para proteger rutas.
- * Verifica el estado de autenticación del AuthContext.
- */
+
 export const ProtectedRoute = () => {
   const { isAuthenticated, loading } = useAuth();
 

@@ -27,7 +27,7 @@ export default function RegisterPage() {
         
         {/* Lado Derecho (Formulario) */}
         <div className="flex flex-col justify-center p-8 md:p-14">
-          <span className="mb-2 text-4xl font-bold text-gray-800">Crear Cuenta</span> {/* CAMBIO: Añadido 'text-gray-800' */}
+          <span className="mb-2 text-4xl font-bold text-gray-800">Crear Cuenta</span> 
           <span className="text-lg text-gray-500 mb-8">
             Empieza a gestionar tus finanzas hoy
           </span>
@@ -46,7 +46,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="nombre"
-                className="block text-sm font-semibold text-gray-700 mb-2" /* CAMBIO: 'text-gray-700' y quitado 'dark:' */
+                className="block text-sm font-semibold text-gray-700 mb-2" 
               >
                 Nombre Completo
               </label>
@@ -58,7 +58,7 @@ export default function RegisterPage() {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   placeholder="Tu Nombre"
-                  className="" /* Quitamos 'pt-6 peer' */
+                  className="" 
                 />
                 <User className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               </div>
@@ -68,7 +68,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-700 mb-2" /* CAMBIO: 'text-gray-700' y quitado 'dark:' */
+                className="block text-sm font-semibold text-gray-700 mb-2" 
               >
                 Correo Electrónico
               </label>
@@ -80,7 +80,7 @@ export default function RegisterPage() {
                   value={correo}
                   onChange={(e) => setCorreo(e.target.value)}
                   placeholder="tu@correo.com"
-                  className="" /* Quitamos 'pt-6 peer' */
+                  className=""
                 />
                 <Mail className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               </div>
@@ -90,7 +90,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-700 mb-2" /* CAMBIO: 'text-gray-700' y quitado 'dark:' */
+                className="block text-sm font-semibold text-gray-700 mb-2" 
               >
                 Contraseña (mín. 6 caracteres)
               </label>
@@ -103,7 +103,7 @@ export default function RegisterPage() {
                   value={contrasena}
                   onChange={(e) => setContrasena(e.target.value)}
                   placeholder="••••••••"
-                  className="" /* Quitamos 'pt-6 peer' */
+                  className="" 
                 />
                 <Lock className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               </div>
@@ -131,7 +131,6 @@ export default function RegisterPage() {
 
         {/* Lado Izquierdo (Branding) */}
         <div className="relative hidden lg:flex flex-col justify-center items-center w-[400px] bg-gradient-to-b from-primary to-indigo-600 rounded-r-2xl p-10 text-white">
-          {/* <div className="absolute inset-0 bg-black opacity-20 rounded-r-2xl"></div>  <- Eliminamos este overlay */}
           <div className="z-10 text-center">
             <BarChart3 className="w-24 h-24 mx-auto mb-4" />
             <h2 className="text-4xl font-bold mb-4">AppGastos</h2>

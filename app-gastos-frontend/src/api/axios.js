@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 // Creamos una instancia de Axios con la URL base del backend
-// 1. CAMBIO: Añadimos 'export const' aquí
+// 1.  Añadimos 'export const' aquí
 export const api = axios.create({
   baseURL: 'http://localhost:4000/api',
   withCredentials: true, // Permite que Axios envíe cookies
@@ -24,5 +24,3 @@ api.interceptors.request.use(
   }
 );
 
-// 2. CAMBIO: Eliminamos esta línea
-// export default api;

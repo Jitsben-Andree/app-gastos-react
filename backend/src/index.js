@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mainApiRouter from './routes/index.js';
 
-// Cargar variables de entorno
+
 dotenv.config();
 
 const app = express();
@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 
 // Enrutador principal de la API
 // Todas las rutas de la API estarán bajo /api
-// Ej: /api/auth/register, /api/gastos/
 app.use('/api', mainApiRouter);
 
 // Iniciar el servidor

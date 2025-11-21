@@ -26,15 +26,14 @@ export default function GastoFormPage() {
           setMonto(Number(gasto.monto).toString());
           setCategoria(gasto.categoria);
           
-          // --- INICIO DE LA CORRECCIÓN 1 (Mostrar) ---
+         
           // Convertir la fecha UTC de la BD a un string YYYY-MM-DD
           const dbDate = new Date(gasto.fecha);
           const utcYear = dbDate.getUTCFullYear();
           const utcMonth = (dbDate.getUTCMonth() + 1).toString().padStart(2, '0');
           const utcDay = dbDate.getUTCDate().toString().padStart(2, '0');
           setFecha(`${utcYear}-${utcMonth}-${utcDay}`);
-          // --- FIN DE LA CORRECCIÓN 1 ---
-
+          
           setDescripcion(gasto.descripcion || '');
         }
         setPageLoading(false);
@@ -55,7 +54,7 @@ export default function GastoFormPage() {
     e.preventDefault();
     setLoading(true);
     
-    // --- INICIO DE LA CORRECCIÓN 2 (Guardar) ---
+    
     // 'fecha' es un string "YYYY-MM-DD" (ej: "2025-11-17")
     // Lo convertimos a un objeto Date interpretándolo como UTC.
     const fechaUTC = new Date(fecha + 'T00:00:00Z');
@@ -66,7 +65,7 @@ export default function GastoFormPage() {
       fecha: fechaUTC, // Guardamos la fecha UTC
       descripcion,
     };
-    // --- FIN DE LA CORRECCIÓN 2 ---
+   
 
     try {
       if (params.id) {
@@ -117,7 +116,7 @@ export default function GastoFormPage() {
           <div>
             <label
               htmlFor="monto"
-              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" // CORRECCIÓN 2: dark:text-gray-200
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" 
             >
               Monto ($)
             </label>
@@ -129,17 +128,17 @@ export default function GastoFormPage() {
                 onChange={(e) => setMonto(e.target.value)}
                 required
                 placeholder="0.00"
-                className="pr-10" // CORRECCIÓN 1: Padding para el icono
+                className="pr-10" 
               />
               <DollarSign className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             </div>
           </div>
 
-          {/* Campo: Categoría (con autocompletado y padding corregido) */}
+         
           <div>
             <label
               htmlFor="categoria"
-              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" // CORRECCIÓN 2: dark:text-gray-200
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" 
             >
               Categoría
             </label>
@@ -151,8 +150,8 @@ export default function GastoFormPage() {
                 onChange={(e) => setCategoria(e.target.value)}
                 required
                 placeholder="Selecciona o escribe una categoría"
-                list="categorias-list" // Enlazar con datalist
-                className="pr-10"      // CORRECCIÓN 1: Padding para el icono
+                list="categorias-list" 
+                className="pr-10"      
               />
               <Tag className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
               
@@ -170,7 +169,7 @@ export default function GastoFormPage() {
           <div>
             <label 
               htmlFor="fecha" 
-              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" // CORRECCIÓN 2: dark:text-gray-200
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" 
             >
               Fecha
             </label>
@@ -181,7 +180,7 @@ export default function GastoFormPage() {
                 value={fecha}
                 onChange={(e) => setFecha(e.target.value)}
                 required
-                className="pr-10" // CORRECCIÓN 1: Padding para el icono
+                className="pr-10" 
               />
               <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
             </div>
@@ -191,7 +190,7 @@ export default function GastoFormPage() {
           <div>
             <label 
               htmlFor="descripcion" 
-              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" // CORRECCIÓN 2: dark:text-gray-200
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2" 
             >
               Descripción (Opcional)
             </label>
@@ -201,7 +200,7 @@ export default function GastoFormPage() {
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
                 placeholder="Ej: Cena con amigos..."
-                className="pr-10 h-24" // CORRECCIÓN 1: Padding para el icono
+                className="pr-10 h-24" 
                 rows="3"
               />
               <FileText className="absolute right-4 top-4 h-5 w-5 text-gray-400" />

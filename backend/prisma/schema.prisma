@@ -1,5 +1,3 @@
-// Este es tu archivo de esquema Prisma.
-// Define los modelos de tu base de datos.
 
 generator client {
   provider = "prisma-client-js"
@@ -7,15 +5,12 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") // Carga la URL desde el archivo .env
-}
+  url      = env("DATABASE_URL") 
 
-// Modelo de Usuario
-// Basado en tu informe
 model Usuario {
   id         Int      @id @default(autoincrement())
   nombre     String
-  correo     String   @unique // El correo debe ser único
+  correo     String   @unique 
   contrasena String
   creado_en  DateTime @default(now())
 
@@ -26,12 +21,10 @@ model Usuario {
   ingresos Ingreso[]
 }
 
-// Modelo de Gasto
-// Basado en tu informe
+
 model Gasto {
-  id          String   @id @default(cuid()) // <-- CAMBIO AQUÍ: De Int a String
-  monto       Decimal  @db.Decimal(10, 2) // Ej: 12345678.99
-  categoria   String
+  id          String   @id @default(cuid()) 
+  monto       Decimal  @db.Decimal(10, 2) 
   fecha       DateTime
   descripcion String? // El '?' lo hace opcional
   creado_en   DateTime @default(now())
@@ -42,8 +35,7 @@ model Gasto {
   // onDelete: Cascade -> Si se borra un usuario, se borran sus gastos.
 }
 
-// --- NUEVO MODELO COMPLETO ---
-// Modelo de Ingreso
+
 model Ingreso {
   id          String   @id @default(cuid())
   monto       Decimal  @db.Decimal(10, 2)

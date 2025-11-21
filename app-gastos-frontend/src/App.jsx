@@ -35,14 +35,14 @@ function PrivateLayout() {
 function App() {
   return (
     <Routes>
-      {/* Rutas Públicas (usan PublicLayout, sin Navbar) */}
+      {/* Rutas Públicas  */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
 
-      {/* Rutas Privadas (usan PrivateLayout, con Navbar y fondo) */}
+      {/* Rutas Privadas  */}
       <Route element={<ProtectedRoute />}>
         <Route element={<PrivateLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />

@@ -97,11 +97,10 @@ export const getMe = async (req, res) => {
   // El ID del usuario viene de req.userId (establecido en el middleware authRequired)
   const userId = req.userId;
 
-  // --- INICIO DE LA MODIFICACIÓN (Hacerlo más robusto) ---
   if (!userId || isNaN(parseInt(userId))) {
     return res.status(400).json({ message: "ID de usuario inválido" });
   }
-  // --- FIN DE LA MODIFICACIÓN ---
+  
 
   try {
     const user = await prisma.usuario.findUnique({

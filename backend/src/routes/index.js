@@ -6,14 +6,14 @@ import ingresosRoutes from './ingresos.routes.js'; // 1. Importar nuevas rutas
 const router = Router();
 
 // Define las rutas base para cada módulo
-// Rutas de autenticación (ej: /api/auth/register)
+// Rutas de autenticación 
 router.use('/auth', authRoutes);
 
-// Rutas de gastos (ej: /api/gastos/)
+// Rutas de gastos
 router.use('/gastos', gastosRoutes);
 
 // --- NUEVA LÍNEA ---
-// Rutas de ingresos (ej: /api/ingresos/)
-router.use('/ingresos', ingresosRoutes); // 2. Añadir nuevas rutas
+// Rutas de ingresos 
+router.use('/ingresos', ingresosRoutes); 
 
 export default router;

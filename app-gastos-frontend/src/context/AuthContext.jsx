@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
       return res.data.user;
     } catch (error) {
-      // ---- INICIO DE LA MODIFICACIÓN ----
+      
       // Verificamos si el error tiene una respuesta del servidor (ej. error 400, 500)
       if (error.response) {
         if (Array.isArray(error.response.data)) {
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
         // Si no hay 'error.response', es un error de red (CORS, backend caído, etc.)
         setErrors([error.message || 'Error de conexión con el servidor']);
       }
-      // ---- FIN DE LA MODIFICACIÓN ----
+      
     }
   };
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
       return res.data.user;
     } catch (error) {
-      // ---- INICIO DE LA MODIFICACIÓN ----
+      
       // Verificamos si el error tiene una respuesta del servidor
       if (error.response) {
         if (Array.isArray(error.response.data)) {
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
         // Si no hay 'error.response', es un error de red
         setErrors([error.message || 'Error de conexión con el servidor']);
       }
-      // ---- FIN DE LA MODIFICACIÓN ----
+     
     }
   };
 
@@ -100,13 +100,13 @@ export const AuthProvider = ({ children }) => {
           setUser(res.data);
         }
       } catch (error) {
-        // --- INICIO DE LA MODIFICACIÓN ---
+        
         // Si el token es inválido (401) o el usuario no se encuentra (404),
         // borramos la cookie y deslogueamos.
         setIsAuthenticated(false);
         setUser(null);
         Cookies.remove('token'); // <-- Añadir esta línea
-        // --- FIN DE LA MODIFICACIÓN ---
+        
       } finally {
         setLoading(false); // Terminamos de cargar
       }

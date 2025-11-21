@@ -5,14 +5,14 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { GastosProvider } from './context/GastosContext.jsx'
-import { IngresosProvider } from './context/IngresosContext.jsx' // 1. Importar
+import { IngresosProvider } from './context/IngresosContext.jsx' 
 import { Toaster } from 'react-hot-toast'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <GastosProvider>
-        <IngresosProvider> {/* 2. Envolver la app */}
+        <IngresosProvider> 
           <BrowserRouter>
             <App />
             <Toaster position="top-right" reverseOrder={false} />
