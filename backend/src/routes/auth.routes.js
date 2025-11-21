@@ -4,6 +4,7 @@ import { authRequired } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
+
 // Rutas de autenticación según tu informe
 router.post('/register', register);
 router.post('/login', login);
