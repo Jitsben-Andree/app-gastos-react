@@ -1,19 +1,18 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useAuth } from '../hooks/useAuth';
-// 1. Importar TODO de ambos contextos
 import { useGastos } from '../hooks/useGastos';
 import { useIngresos } from '../hooks/useIngresos';
 
 import GastoCard from '../components/GastoCard';
-import IngresoCard from '../components/IngresoCard'; // 2. Importar IngresoCard
+import IngresoCard from '../components/IngresoCard'; 
 import TotalGastosCard from '../components/TotalGastosCard';
-import TotalIngresosCard from '../components/TotalIngresosCard'; // 3. Importar TotalIngresosCard
-import SaldoCard from '../components/SaldoCard'; // 4. Importar SaldoCard
+import TotalIngresosCard from '../components/TotalIngresosCard'; 
+import SaldoCard from '../components/SaldoCard'; 
 import GastosPorCategoriaCard from '../components/GastosPorCategoriaCard';
-import { Loader, PlusCircle, Filter, TrendingUp } from 'lucide-react'; // <-- ¡AQUÍ ESTÁ LA CORRECCIÓN!
+import { Loader, PlusCircle, Filter, TrendingUp } from 'lucide-react'; 
 import { Link } from 'react-router-dom';
 
-// ... (Componente CategoryPill se queda igual) ...
+
 function CategoryPill({ children, onClick, isActive }) {
   return (
     <button
@@ -28,7 +27,7 @@ function CategoryPill({ children, onClick, isActive }) {
     </button>
   );
 }
-// ... (Array MESES se queda igual) ...
+
 const MESES = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -36,7 +35,7 @@ const MESES = [
 
 export default function DashboardPage() {
   const { user } = useAuth();
-  // 5. Usar AMBOS contextos
+  //Usar AMBOS contextos
   const { gastos, getGastos, errors: gastosErrors } = useGastos();
   const { ingresos, getIngresos, errors: ingresosErrors } = useIngresos();
   
@@ -45,11 +44,11 @@ export default function DashboardPage() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [categoryFilter, setCategoryFilter] = useState([]);
 
-  // 6. Cargar AMBOS tipos de datos
+  //  Cargar AMBOS tipos de datos
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      // Cargar gastos e ingresos al mismo tiempo
+      
       await Promise.all([
         getGastos(),
         getIngresos()
@@ -57,25 +56,24 @@ export default function DashboardPage() {
       setLoading(false);
     };
     loadData();
-  }, [getGastos, getIngresos]); // Depender de ambos
+  }, [getGastos, getIngresos]); 
 
-  // 7. Memo para categorías únicas (igual)
+  // Memo para categorías únicas (igual)
   const uniqueCategories = useMemo(() => {
     const categories = new Set(gastos.map(g => g.categoria).filter(Boolean));
     return Array.from(categories).sort();
   }, [gastos]);
 
-  // --- 8. LÓGICA DE CÁLCULO MEJORADA (UNIFICADA) ---
+  //  LÓGICA DE CÁLCULO MEJORADA (UNIFICADA) 
   const summaryData = useMemo(() => {
     
-    // 8.1. Filtrar Gastos (por fecha y categoría)
+    //Filtrar Gastos (por fecha y categoría)
     const filteredGastos = gastos.filter(gasto => {
-      // --- INICIO DE LA CORRECCIÓN ---
       const fechaGasto = new Date(gasto.fecha);
-      // Usar UTC para los filtros para coincidir con cómo se guardan
+      
       const anoGasto = fechaGasto.getUTCFullYear(); 
-      const mesGasto = fechaGasto.getUTCMonth(); // 0 (Ene) - 11 (Dic)
-      // --- FIN DE LA CORRECCIÓN ---
+      const mesGasto = fechaGasto.getUTCMonth(); 
+      
 
       if (anoGasto !== selectedYear) return false;
       if (selectedMonth !== 'todo' && mesGasto !== parseInt(selectedMonth)) {
@@ -85,17 +83,17 @@ export default function DashboardPage() {
       if (categoryFilter.length > 0 && !categoryFilter.includes(gasto.categoria)) {
         return false;
       }
-      return true; // Pasa todos los filtros
+      return true; 
     });
 
-    // 8.2. Filtrar Ingresos (solo por fecha)
+    // Filtrar Ingresos
     const filteredIngresos = ingresos.filter(ingreso => {
-      // --- INICIO DE LA CORRECCIÓN ---
+      
       const fechaIngreso = new Date(ingreso.fecha);
       // Usar UTC para los filtros
       const anoIngreso = fechaIngreso.getUTCFullYear();
-      const mesIngreso = fechaIngreso.getUTCMonth(); // 0 (Ene) - 11 (Dic)
-      // --- FIN DE LA CORRECCIÓN ---
+      const mesIngreso = fechaIngreso.getUTCMonth(); 
+      
 
       if (anoIngreso !== selectedYear) return false;
       if (selectedMonth !== 'todo' && mesIngreso !== parseInt(selectedMonth)) {
@@ -113,7 +111,7 @@ export default function DashboardPage() {
 
     const saldo = totalIngresos - totalGastos;
 
-    // 8.4. Calcular "Por Categoría" (solo de gastos filtrados)
+    //  Calcular "Por Categoría" 
     const categoriesMap = filteredGastos.reduce((acc, gasto) => {
       const categoria = gasto.categoria || 'Sin Categoría';
       const monto = Number(gasto.monto);
@@ -132,12 +130,12 @@ export default function DashboardPage() {
       }))
       .sort((a, b) => b.total - b.total);
 
-    // 8.5. Unir y ordenar transacciones
+    //  Unir y ordenar transacciones
     const gastosConTipo = filteredGastos.map(g => ({ ...g, type: 'gasto' }));
     const ingresosConTipo = filteredIngresos.map(i => ({ ...i, type: 'ingreso' }));
 
     const allTransactions = [...gastosConTipo, ...ingresosConTipo].sort(
-      (a, b) => new Date(b.fecha) - new Date(a.fecha) // Ordenar por fecha, más reciente primero
+      (a, b) => new Date(b.fecha) - new Date(a.fecha) 
     );
 
     return { 
@@ -146,8 +144,8 @@ export default function DashboardPage() {
       totalIngresos,
       countIngresos,
       saldo,
-      byCategory, // Para el gráfico de pastel
-      allTransactions // Para la lista unificada
+      byCategory, 
+      allTransactions 
     };
 
   }, [gastos, ingresos, selectedMonth, selectedYear, categoryFilter]);
@@ -184,10 +182,10 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* --- Filtros  --- */}
+          {/*  Filtros   */}
           <div className="mb-8 p-6 bg-card dark:bg-card-dark rounded-xl shadow-md space-y-4">
             
-            {/* --- Filtro de Fecha  --- */}
+            {/*  Filtro de Fecha   */}
             <div className="flex flex-col sm:flex-row sm:items-end gap-4">
               {/* Desplegable de Mes */}
               <div className="flex-1">
@@ -225,7 +223,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* --- Filtro de Categorías (Píldoras) --- */}
+            {/*Filtro de Categorías  */}
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Filter className="w-5 h-5 text-gray-500" />
@@ -254,7 +252,7 @@ export default function DashboardPage() {
           </div>
 
 
-          {/* --- 9. NUEVO LAYOUT DE RESUMEN --- */}
+          {/*  NUEVO LAYOUT DE RESUMEN --- */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <TotalIngresosCard 
               total={summaryData.totalIngresos} 
@@ -269,12 +267,12 @@ export default function DashboardPage() {
             />
           </div>
 
-          {/* --- Gráfico de Categorías  --- */}
+          {/* Gráfico de Categorías  */}
           <div className="mb-6">
             <GastosPorCategoriaCard data={summaryData.byCategory} />
           </div>
 
-          {/* --- 10. LISTA DE TRANSACCIONES UNIFICADA --- */}
+          {/*LISTA DE TRANSACCIONES UNIFICADA --- */}
           <h2 className="text-2xl font-bold mb-4">
             Transacciones Recientes
           </h2>

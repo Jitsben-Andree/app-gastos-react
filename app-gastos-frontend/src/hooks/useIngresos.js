@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import { IngresosContext } from '../context/IngresosContext';
 
-/**
- * Hook personalizado para acceder al IngresosContext.
- */
+
 export const useIngresos = () => {
   const context = useContext(IngresosContext);
   if (!context) {

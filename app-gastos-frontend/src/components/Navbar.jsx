@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { LogOut, Wallet, PlusCircle, TrendingUp } from 'lucide-react'; // 1. Importar iconos
+import { LogOut, Wallet, PlusCircle, TrendingUp } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 export default function Navbar() {

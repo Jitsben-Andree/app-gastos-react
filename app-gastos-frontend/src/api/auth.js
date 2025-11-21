@@ -1,4 +1,4 @@
-import { api } from "./Axios"; // CAMBIO: Importamos { api } en lugar de 'api'
+import { api } from "./Axios"; 
 
 // Petición para registrar un usuario
 export const registerRequest = (user) => api.post('/auth/register', user);

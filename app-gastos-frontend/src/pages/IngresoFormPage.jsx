@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useIngresos } from '../hooks/useIngresos'; // 1. Usar hook de Ingresos
+import { useIngresos } from '../hooks/useIngresos'; 
 import { toast } from 'react-hot-toast';
 import { Save, Loader, ArrowLeft, DollarSign, Calendar, FileText } from 'lucide-react';
 

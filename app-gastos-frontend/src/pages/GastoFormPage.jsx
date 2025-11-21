@@ -7,14 +7,14 @@ import { Save, Loader, ArrowLeft, DollarSign, Tag, Calendar, FileText } from 'lu
 export default function GastoFormPage() {
   const [monto, setMonto] = useState('');
   const [categoria, setCategoria] = useState('');
-  const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]); // Fecha de hoy
+  const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]); 
   const [descripcion, setDescripcion] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false); // Para cargar datos al editar
+  const [pageLoading, setPageLoading] = useState(false);
   
   const params = useParams();
   const navigate = useNavigate();
-  // Traer 'gastos' (la lista completa) desde el contexto
+  
   const { createGasto, getGasto, updateGasto, gastos } = useGastos();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function GastoFormPage() {
           setCategoria(gasto.categoria);
           
          
-          // Convertir la fecha UTC de la BD a un string YYYY-MM-DD
+          
           const dbDate = new Date(gasto.fecha);
           const utcYear = dbDate.getUTCFullYear();
           const utcMonth = (dbDate.getUTCMonth() + 1).toString().padStart(2, '0');
@@ -42,12 +42,12 @@ export default function GastoFormPage() {
     loadGasto();
   }, [params.id, getGasto]);
 
-  // Crear la lista de categorías únicas para el autocompletado
+  
   const uniqueCategories = useMemo(() => {
-    // Usamos 'Set' para asegurarnos de que no haya duplicados
+    
     const categories = new Set(gastos.map(g => g.categoria).filter(Boolean));
-    return Array.from(categories).sort(); // Devolvemos un array ordenado
-  }, [gastos]); // Se recalcula solo si la lista de gastos cambia
+    return Array.from(categories).sort();
+  }, [gastos]); 
 
 
   const handleSubmit = async (e) => {
@@ -55,14 +55,14 @@ export default function GastoFormPage() {
     setLoading(true);
     
     
-    // 'fecha' es un string "YYYY-MM-DD" (ej: "2025-11-17")
-    // Lo convertimos a un objeto Date interpretándolo como UTC.
+    
+    
     const fechaUTC = new Date(fecha + 'T00:00:00Z');
 
     const gastoData = {
       monto: parseFloat(monto),
       categoria,
-      fecha: fechaUTC, // Guardamos la fecha UTC
+      fecha: fechaUTC, 
       descripcion,
     };
    

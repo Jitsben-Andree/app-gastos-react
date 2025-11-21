@@ -2,28 +2,28 @@ import { createContext, useState, useEffect } from 'react';
 import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth';
 import Cookies from 'js-cookie';
 
-// 1. Crear el contexto
+
 export const AuthContext = createContext();
 
-// 2. Crear el Proveedor (Provider)
+//  Crear el Proveedor (Provider)
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true); // Para saber si ya se verificó el token
+  const [loading, setLoading] = useState(true); 
   const [errors, setErrors] = useState([]);
 
-  // Función de Registro (Signup)
+  
   const signup = async (userData) => {
     try {
       const res = await registerRequest(userData);
-      // Guardamos el token en las cookies (más seguro que localStorage para SSR)
+      // Guardamos el token en las cookies
       Cookies.set('token', res.data.token);
       setUser(res.data.user);
       setIsAuthenticated(true);
       return res.data.user;
     } catch (error) {
       
-      // Verificamos si el error tiene una respuesta del servidor (ej. error 400, 500)
+      // Verificamos si el error tiene una respuesta del servidor
       if (error.response) {
         if (Array.isArray(error.response.data)) {
           setErrors(error.response.data);
@@ -31,14 +31,14 @@ export const AuthProvider = ({ children }) => {
           setErrors([error.response.data.message || 'Error en el registro']);
         }
       } else {
-        // Si no hay 'error.response', es un error de red (CORS, backend caído, etc.)
+        // es un error de red (CORS, backend caído)
         setErrors([error.message || 'Error de conexión con el servidor']);
       }
       
     }
   };
 
-  // Función de Login (Signin)
+  
   const signin = async (userData) => {
     try {
       const res = await loginRequest(userData);
@@ -63,24 +63,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función de Logout
+  // cerramos sesion 
   const logout = () => {
     Cookies.remove('token');
     setUser(null);
     setIsAuthenticated(false);
   };
 
-  // Limpiar errores después de un tiempo
+  //errores 
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
         setErrors([]);
-      }, 3000); // Limpia errores después de 3 segundos
+      }, 3000); 
       return () => clearTimeout(timer);
     }
   }, [errors]);
 
-  // Efecto para verificar el token al cargar la app
+  // token
   useEffect(() => {
     const checkLogin = async () => {
       const token = Cookies.get('token');
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        // Hacemos una petición a /auth/me usando el token
+        // peticion /auth/me usando el token
         const res = await verifyTokenRequest(token);
         if (!res.data) {
           setIsAuthenticated(false);
@@ -101,20 +101,20 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         
-        // Si el token es inválido (401) o el usuario no se encuentra (404),
-        // borramos la cookie y deslogueamos.
+        // token inválido (401) o el usuario no se encuentra (404),
+        // borramos cookie y deslogueamos.
         setIsAuthenticated(false);
         setUser(null);
-        Cookies.remove('token'); // <-- Añadir esta línea
+        Cookies.remove('token'); 
         
       } finally {
-        setLoading(false); // Terminamos de cargar
+        setLoading(false); 
       }
     };
     checkLogin();
   }, []);
 
-  // 3. Devolvemos el proveedor con los valores
+  //  Devolvemos el proveedor con los valores
   return (
     <AuthContext.Provider
       value={{

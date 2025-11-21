@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import { GastosContext } from '../context/GastosContext';
 
-/**
- * Hook personalizado para acceder al GastosContext.
- */
+
 export const useGastos = () => {
   const context = useContext(GastosContext);
   if (!context) {

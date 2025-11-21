@@ -1,4 +1,4 @@
-import { api } from './axios'; // Importamos la instancia de Axios
+import { api } from "./Axios"; 
 
 // Petición para OBTENER TODOS los ingresos
 export const getIngresosRequest = () => api.get('/ingresos');

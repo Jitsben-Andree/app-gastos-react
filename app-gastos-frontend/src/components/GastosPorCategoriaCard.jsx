@@ -5,11 +5,11 @@ import {
   BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
 
-// Función para formatear a moneda (ej: $242.00)
+
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD', // Puedes cambiar esto si es necesario
+    currency: 'USD', 
   }).format(amount);
 };
 
@@ -17,7 +17,7 @@ const formatCurrency = (amount) => {
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899'];
 
 export default function GastosPorCategoriaCard({ data }) {
-  const [chartType, setChartType] = useState('pie'); // 'pie' o 'bar'
+  const [chartType, setChartType] = useState('pie');
 
   // Solo mostramos las 5 categorías principales
   const topCategories = data.slice(0, 5);
@@ -36,7 +36,7 @@ export default function GastosPorCategoriaCard({ data }) {
     fontWeight: '600', 
   };
   const tooltipItemStyle = {
-    color: '#374151', // text-gray-700
+    color: '#374151',
   };
   
 
@@ -80,7 +80,7 @@ export default function GastosPorCategoriaCard({ data }) {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mt-4">
           
-          {/* Columna 1: Gráfico (Condicional) */}
+          {/* Columna 1: Gráfico */}
           <div className="h-48 md:h-56">
             <ResponsiveContainer width="100%" height="100%">
               {chartType === 'pie' ? (
