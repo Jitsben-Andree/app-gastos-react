@@ -6,6 +6,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL") 
+}
 
 model Usuario {
   id         Int      @id @default(autoincrement())
@@ -23,16 +24,15 @@ model Usuario {
 
 
 model Gasto {
-  id          String   @id @default(cuid()) 
-  monto       Decimal  @db.Decimal(10, 2) 
+  id          String   @id @default(cuid())
+  monto       Decimal  @db.Decimal(10, 2)
+  categoria   String   // <-- AÑADIR ESTO
   fecha       DateTime
-  descripcion String? // El '?' lo hace opcional
+  descripcion String?
   creado_en   DateTime @default(now())
 
-  // Relación: Cada Gasto pertenece a un Usuario
-  usuario_id Int
-  usuario    Usuario  @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
-  // onDelete: Cascade -> Si se borra un usuario, se borran sus gastos.
+  usuario_id  Int
+  usuario     Usuario @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
 }
 
 
